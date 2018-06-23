@@ -1,0 +1,22 @@
+<h1>Todos</h1>
+<h2>All todos</h2>
+
+<% if todos.any? %>
+  <table id="todos">
+    <tr>
+      <th>Name</th>
+      <th>Due Date</th>
+      <th>Delete</th>
+    </tr>
+    <% todos.each do |todo| %>
+      <tr class="todo">
+        <td><%= todo.name %></td>
+        <td><%= todo.due_date %></td>
+        <td><%= form_for :todo, "todos/#{todo.id}", method: :delete do submit 'DELETE' end %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p class="placeholder">There are no todos yet.</p>
+<% end %>
+<%= link_to 'Create Todo', routes.new_todo_path %>
